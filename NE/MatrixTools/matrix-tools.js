@@ -725,3 +725,4 @@ var Vector4 = function(opt_src) {
   }
   this.elements = v;
 }
+

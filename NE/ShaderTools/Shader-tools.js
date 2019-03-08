@@ -1,4 +1,16 @@
- function initShaders(gl, vshader, fshader) {//tools for webGL
+class ShaderTool{
+    static instanceCount = 0;
+    constructor(){
+        this.instanceCount ++;
+        console.log("new shader tool,count:"+this.instanceCount);
+    }
+    /**
+     * to initiate the shader program using vshader and fshader;
+     * @param {webGL context} gl 
+     * @param {vertex shader} vshader 
+     * @param {fragment shader} fshader 
+     */
+    initShaders(gl, vshader, fshader) {//tools for webGL
         let program = createProgram(gl, vshader, fshader);
         if(!program){
             console.log("cannot create program\n");
@@ -9,7 +21,13 @@
 
         return true;
     }
-    function createProgram(gl, vshader, fshader) {
+    /**
+     * to create a GL program which is used to using shaders we write;
+     * @param {webGL context} gl 
+     * @param {vertex shader} vshader 
+     * @param {fragment shader} fshader 
+     */
+    createProgram(gl, vshader, fshader) {
         let vertexShader = loadShader(gl, gl.VERTEX_SHADER, vshader);
         let fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fshader);
 
@@ -38,7 +56,13 @@
         }
         return program;
     }
-    function loadShader(gl, type, shader_source) {
+    /**
+     * to use source code of shader to loadshader,then delete shader;
+     * @param {webGL context} gl 
+     * @param {shader type,(vertexShader || fragmentShader)} type 
+     * @param {the glsl code of the shader} shader_source 
+     */
+    loadShader(gl, type, shader_source) {
         let shader = gl.createShader(type);
         if(shader ==null){
             console.log("cannot create shader\n");
@@ -57,3 +81,7 @@
 
         return shader;
     }
+ }
+module.exports={
+    ShaderTool:ShaderTool,
+}
